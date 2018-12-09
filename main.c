@@ -60,7 +60,7 @@ void get_test(double a[n][n], double b[n]) {
 
 int main(void)
 {
-    printf("")
+    printf("");
     printf("\n");
     printf("\n");
     double a[n][n];
