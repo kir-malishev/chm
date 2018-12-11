@@ -67,24 +67,35 @@ int main(void)
     double b[n];
     double x[n];
     get_test(a, b);
-
     print_m(n, a, b);
-    gauss(n, a, b, x);
-    //print_m(n, a, b);
-    printf("\n");
-    print_x(n, x);
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    printf("\n");
-    gauss_choice(n, a, b, x);
-    //print_m(n, a, b);
-    printf("\n");
-    print_x(n, x);
+//    gauss(n, a, b, x);
+//    printf("\n");
+//    print_x(n, x);
+//    printf("\n");
+//    printf("\n");
+//    printf("\n");
+//    printf("\n");
+//    gauss_choice(n, a, b, x);
+//    printf("\n");
+//    print_x(n, x);
     printf("\n");
     printf("\n");
-    int count = rel_up(n, a, b, x, 1.5, 1e-6);
+    for (double w = 0.1; w <= 1.91; w += 0.1) {
+        int count = rel_up(n, a, b, x, w, 1e-6);
+        printf("%lf;%d\n", w, count);
+    }
+    int count = rel_up(n, a, b, x, 0.7, 1e-6);
     printf("\n\n%d\n\n", count);
     print_x(n, x);
+//    double x[4];
+//    print_m(4, a2, b2);
+//    printf("\n\n");
+//    gauss(4, a2, b2, x);
+//    print_x(4, x);
+//    printf("\n\n");
+//    double inv1[4][4];
+//    inverse(4, a2, inv1);
+//    print_a(4, inv1);
+//    printf("\n\n%lf\n\n%lf", det(4, a2), condition(4, a2));
     return 0;
 }

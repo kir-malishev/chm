@@ -3,7 +3,8 @@
 
 #include "utils.c"
 
-void swap_lines(int n, double a[n][n], double b[n], int line1, int line2) {
+void swap_lines(int n, double a[n][n], double b[n], int line1, int line2)
+{
     double tmp;
     if (b != NULL) {
         tmp = b[line1];
@@ -17,7 +18,8 @@ void swap_lines(int n, double a[n][n], double b[n], int line1, int line2) {
     }
 }
 
-void swap_columns(int n, double a[n][n], int col1, int col2) {
+void swap_columns(int n, double a[n][n], int col1, int col2)
+{
     double tmp;
     for (int i = 0; i < n; i++) {
         tmp = a[i][col1];
@@ -26,24 +28,27 @@ void swap_columns(int n, double a[n][n], int col1, int col2) {
     }
 }
 
-void sub_lines(int n, double m[n][n], double b[n], int line1, int line2, double k) {
+void sub_lines(int n, double m[n][n], double b[n], int line1, int line2, double k)
+{
     if (b != NULL) {
-        b[line1] -= b[line2]*k;
+        b[line1] -= b[line2] * k;
     }
     for (int i = 0; i < n; i++) {
 
-        m[line1][i] -= m[line2][i]*k;
+        m[line1][i] -= m[line2][i] * k;
     }
 }
 
-void div_line(int n, double m[n][n], int line, double k) {
+void div_line(int n, double m[n][n], int line, double k)
+{
     for (int i = 0; i < n; i++) {
         m[line][i] /= k;
     }
 }
 
 
-void triangular_upper(int n, double a[n][n], double b[n], double c[n][n]) {
+void triangular_upper(int n, double a[n][n], double b[n], double c[n][n])
+{
     for (int i = 0; i < n; i++) {
         int line = i;
         while (line < n && a[line][i] == 0) {
@@ -58,12 +63,10 @@ void triangular_upper(int n, double a[n][n], double b[n], double c[n][n]) {
         for (int j = i + 1; j < n; j++) {
 
             if (a[j][i] != 0) {
-                double k = a[j][i]/a[i][i];
+                double k = a[j][i] / a[i][i];
                 sub_lines(n, a, b, j, i, k);
                 a[j][i] = 0;
                 if (c != NULL) {
-//                    print_a(n, c);
-//                    printf("\n");
                     sub_lines(n, c, NULL, j, i, k);
                 }
             }
@@ -71,7 +74,8 @@ void triangular_upper(int n, double a[n][n], double b[n], double c[n][n]) {
     }
 }
 
-void triangular_lower(int n, double a[n][n], double b[n], double c[n][n]) {
+void triangular_lower(int n, double a[n][n], double b[n], double c[n][n])
+{
     for (int i = n - 1; i >= 0; i--) {
         int line = i;
         while (line >= 0 && a[line][i] == 0) {
@@ -86,12 +90,10 @@ void triangular_lower(int n, double a[n][n], double b[n], double c[n][n]) {
         for (int j = i - 1; j >= 0; j--) {
 
             if (a[j][i] != 0) {
-                double k = a[j][i]/a[i][i];
+                double k = a[j][i] / a[i][i];
                 sub_lines(n, a, b, j, i, k);
                 a[j][i] = 0;
                 if (c != NULL) {
-//                    print_a(n, c);
-//                    printf("\n");
                     sub_lines(n, c, NULL, j, i, k);
                 }
             }
@@ -99,7 +101,8 @@ void triangular_lower(int n, double a[n][n], double b[n], double c[n][n]) {
     }
 }
 
-void gauss(int n, double a[n][n], double b[n], double x[n]) {
+void gauss(int n, double a[n][n], double b[n], double x[n])
+{
     double a1[n][n];
     double b1[n];
     copy_m(n, a, a1);
@@ -108,13 +111,14 @@ void gauss(int n, double a[n][n], double b[n], double x[n]) {
     for (int i = n - 1; i >= 0; i--) {
         x[i] = b1[i];
         for (int j = i + 1; j < n; j++) {
-            x[i] -= x[j]*a1[i][j];
+            x[i] -= x[j] * a1[i][j];
         }
         x[i] /= a1[i][i];
     }
 }
 
-void gauss_choice(int n, double a[n][n], double b[n], double x[n]) {
+void gauss_choice(int n, double a[n][n], double b[n], double x[n])
+{
     double a1[n][n];
     double b1[n];
     copy_m(n, a, a1);
@@ -145,7 +149,7 @@ void gauss_choice(int n, double a[n][n], double b[n], double x[n]) {
         x1[ind2] = tmp;
         for (int j = i + 1; j < n; j++) {
             if (a1[j][i] != 0) {
-                double k = a1[j][i]/a1[i][i];
+                double k = a1[j][i] / a1[i][i];
                 sub_lines(n, a1, b1, j, i, k);
                 a1[j][i] = 0;
             }
@@ -154,14 +158,15 @@ void gauss_choice(int n, double a[n][n], double b[n], double x[n]) {
     for (int i = n - 1; i >= 0; i--) {
         x[x1[i]] = b1[i];
         for (int j = i + 1; j < n; j++) {
-            x[x1[i]] -= x[x1[j]]*a1[i][j];
+            x[x1[i]] -= x[x1[j]] * a1[i][j];
         }
         x[x1[i]] /= a1[i][i];
     }
 }
 
 
-double det(int n, double m[n][n]) {
+double det(int n, double m[n][n])
+{
     double m1[n][n];
     copy_m(n, m, m1);
     triangular_upper(n, m1, NULL, NULL);
@@ -172,7 +177,8 @@ double det(int n, double m[n][n]) {
     return d;
 }
 
-void inverse(int n, double m[n][n], double inv[n][n]) {
+void inverse(int n, double m[n][n], double inv[n][n])
+{
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             inv[i][j] = i == j;
@@ -182,10 +188,30 @@ void inverse(int n, double m[n][n], double inv[n][n]) {
     copy_m(n, m, m1);
     triangular_upper(n, m1, NULL, inv);
     triangular_lower(n, m1, NULL, inv);
-    print_a(n, m1);
-    printf("\n");
     for (int i = 0; i < n; i++) {
         div_line(n, inv, i, m1[i][i]);
     }
 
+}
+
+double norm(int n, double m[n][n])
+{
+    double max = 0;
+    for (int i = 0; i < n; i++) {
+        double sum = 0;
+        for (int j = 0; j < n; j++) {
+            sum += fabs(m[i][j]);
+        }
+        if (sum > max) {
+            max = sum;
+        }
+    }
+    return max;
+}
+
+double condition(int n, double m[n][n])
+{
+    double inv[n][n];
+    inverse(n, m, inv);
+    return norm(n, m) * norm(n, inv);
 }

@@ -21,7 +21,7 @@ void copy_b(int n, const double b1[n], double b2[n]) {
 void print_a(int n, double m[n][n]) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            printf("%lf ", m[i][j]);
+            printf("%lf & ", m[i][j]);
         }
         printf("\n");
     }
@@ -30,7 +30,7 @@ void print_a(int n, double m[n][n]) {
 
 void print_x(int n, double x[n]) {
     for (int i = 0; i < n; i++) {
-        printf("%0.20lf ", x[i]);
+        printf("%0.6lf ", x[i]);
     }
 }
 
@@ -39,8 +39,9 @@ void print_x(int n, double x[n]) {
 void print_m(int n, double m[n][n], double b[n]) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            printf("%lf ", m[i][j]);
+            printf("%lf & ", m[i][j]);
         }
         printf("%lf\n", b[i]);
     }
 }
+
